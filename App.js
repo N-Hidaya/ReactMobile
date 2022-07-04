@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Image, TextInput, ScrollView, Button} from 'react-native';
+import { Text, View, Image, TextInput, ScrollView, Button} from 'react-native';
+import {FlatListBasics, SectionListBasic} from './second';
 
 
 const Cat = (props) => {
@@ -14,7 +15,21 @@ const Cat = (props) => {
   
 }
 
-export default function App() {
+const Translator = () => {
+  const [text, setText] = useState('');
+
+  return (
+    <View style={{padding:10}}>
+      <TextInput style={{height:40}} placeholder="Type something here for surprise" 
+        onChangeText={newText => setText(newText)} defaultValue={text} />
+      <Text style={{padding:10, fontSize:42}}>
+        {text.split(' ').map((word) => word && '대박').join(' ')}
+      </Text>
+    </View>
+  );
+}
+
+const FirstApp = () => {
   return (
     <ScrollView>
       <Text>Daya's App</Text>
@@ -27,15 +42,17 @@ export default function App() {
                 defaultValue="Enter your favourite thing" />
 
       <Cat name="Fluffy" />
+      <Translator />
     </ScrollView>
+    
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <ScrollView>
+      <FirstApp />
+      <SectionListBasic />
+    </ScrollView>
+  );
+}
