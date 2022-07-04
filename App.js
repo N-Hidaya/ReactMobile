@@ -1,6 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, ScrollView} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, Button} from 'react-native';
+
+
+const Cat = (props) => {
+  const [hungry, setHungry] = useState(true);
+
+  return (
+  <View>
+    <Text>I am {props.name}. I am {hungry ? "hungry" : "full"}!</Text>
+    <Button onPress={() => {setHungry(false);}} disabled={!hungry} title={hungry ? "Pour me some milk please!" : "Thank you"} />
+  </View>
+  );
+  
+}
 
 export default function App() {
   return (
@@ -13,6 +25,8 @@ export default function App() {
       </View>
       <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1}}
                 defaultValue="Enter your favourite thing" />
+
+      <Cat name="Fluffy" />
     </ScrollView>
   );
 }
